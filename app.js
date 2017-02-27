@@ -5,9 +5,9 @@ app.get('/', function (req, res) {
   res.send('Hello, World!')
 })
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+app.listen(process.env.PORT || 3000, function() {
+  console.log('acc-latte app connected to server')
+});
 
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
