@@ -13,7 +13,7 @@ var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
 // Connection URL
-var url = 'mongodb://localhost:27017/myproject';
+var url = 'mongodb://acc-latte:[2LoD4jU2W34K+2@ds157839.mlab.com:57839/acc-latte';
 
 // Use connect method to connect to the server
 MongoClient.connect(url, function(err, db) {
