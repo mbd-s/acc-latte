@@ -1,6 +1,6 @@
 var config = {};
 
 config.mongo = {}
-config.mongo.url = process.env.MONGODOB_URL || 'url';
+config.mongo.url = process.env.MONGODOB_URI || 'url';
 
 module.exports = config;
