@@ -1,6 +1,6 @@
 var express = require('express')
 var app = express()
-require('dotenv').config()
+require('dotenv').load()
 
 var config = require('./config');
 
