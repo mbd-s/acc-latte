@@ -1,7 +1,14 @@
 var config = {};
-
 config.mongo = {}
-config.mongo.url = process.env.MONGODOB_URI;
+
+var env = process.env.NODE_ENV || 'development';
+
+if (env === 'development'){
+  config.mongo.url = process.env.MONGODOB_URI;
+}
+else {
+  config.mongo.url = 'mongodb://localhost:27017/test'
+}
 
 module.exports = config;
-console.log(process.env.MONGODOB_URI)
+console.log(process.env.MONGODOB_URI);
