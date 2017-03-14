@@ -1,7 +1,7 @@
 var config = {};
 
 config.mongo = {}
-config.mongo.url = process.env.MONGODOB_URI || 'url';
+config.mongo.url = process.env.MONGODOB_URI;
 
 module.exports = config;
-console.log("hello from config.js")
+console.log(process.env.MONGODOB_URI)
