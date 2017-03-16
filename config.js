@@ -1,9 +1,9 @@
 var config = {};
 config.mongo = {}
 
-var env = process.env.NODE_ENV || 'development';
+var env = process.env.NODE_ENV || 'production';
 
-if (env === 'development'){
+if (env === 'production'){
   config.mongo.url = process.env.MONGODOB_URI;
 }
 else {
