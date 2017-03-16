@@ -5,6 +5,18 @@ require('dotenv').load()
 var config = require('./config');
 
 var url = config.mongo.url;
+var mongoose = require('mongoose');
+mongoose.connect(url);
+
+var passport = require('passport');
+var session = require('express-session');
+app.use(session({
+    secret: 'mySecretKey',
+    resave: true,
+    saveUninitialized: false
+  }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/', function (req, res) {
   res.send('Hello, World!')
