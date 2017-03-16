@@ -5,8 +5,6 @@ require('dotenv').load()
 var config = require('./config');
 
 var url = config.mongo.url;
-console.log('****************************');
-console.log(url);
 
 app.get('/', function (req, res) {
   res.send('Hello, World!')

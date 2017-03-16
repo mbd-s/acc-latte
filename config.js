@@ -11,4 +11,3 @@ else {
 }
 
 module.exports = config;
-console.log(process.env.MONGODB_URI);
