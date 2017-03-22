@@ -1,13 +1,13 @@
 var express = require('express');
 var app = express();
 require('dotenv').load();
-
+var path = require('path');
 var config = require('./config');
 
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-app.set('views', __dirname + '/views');
-app.set('view engine', 'pug');
+app.use(express.static(path.join(__dirname, '/views')))
+
 
 var url = config.mongo.url;
 var mongoose = require('mongoose');
@@ -25,13 +25,17 @@ passport.use(new FacebookStrategy({
 ));
 
 app.get('/', function (req, res) {
-  res.send('Hello, World!');
+  res.sendFile('index.html');
 })
 
-app.get('/login',
+/* app.get('/login',
   function(req, res){
-    res.render('login');
-  });
+    res.sendFile(__dirname +'login.html');
+  }); */
+
+  app.get('/login.html', function (req, res) {
+    res.sendFile('login.html');
+  })
 
 app.get('/login/facebook',
   passport.authenticate('facebook'));
