@@ -28,10 +28,6 @@ app.get('/', function (req, res) {
   res.sendFile('index.html');
 })
 
-app.get('/login.html', function (req, res) {
-  res.sendFile('login.html');
-})
-
 app.get('/login/facebook',
   passport.authenticate('facebook'));
 
