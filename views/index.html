@@ -11,10 +11,23 @@
 
   <body>
     <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Acc-Latte</a>
-    </div>
-  </nav>
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">Acc-Latte</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="*">Home</a></li>
+          <li><a href="*">About</a></li>
+          <li><a href="*">Contact</a></li>
+          <li><a href="*">LeaderBoared</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="*">Home</a></li>
+          <li><a href="*">About</a></li>
+          <li><a href="*">Contact</a></li>
+          <li><a href="*">LeaderBoared</a></li>
+        </ul>
+      </div>
+    </nav>
 
     <div class="container">
       <h2>Welcome Page</h2>
@@ -29,8 +42,9 @@
         }
         (document, 'script', 'facebook-jssdk'));
       </script>
-      <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true">
+      <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="flase" data-auto-logout-link="true">
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+      <script src="js/index.js"></script>
   </body>
 </html>
