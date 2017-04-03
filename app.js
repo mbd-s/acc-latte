@@ -7,7 +7,7 @@ var config = require('./config');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 app.use(express.static(path.join(__dirname, '/views')))
-
+app.use(express.static('public'))
 
 var url = config.mongo.url;
 var mongoose = require('mongoose');
