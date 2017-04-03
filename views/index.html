@@ -11,27 +11,32 @@
 
   <body>
     <nav>
-      <div class="nav-wrapper">
+      <div class="nav-wrapper cyan">
         <a href="#!" class="brand-logo">Acc-Latte</a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse pulse cyan"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="*">Home</a></li>
-          <li><a href="*">About</a></li>
-          <li><a href="*">Contact</a></li>
-          <li><a href="*">LeaderBoared</a></li>
+          <li><a href="">Home</a></li>
+          <li><a href="">About</a></li>
+          <li><a href="">Contact</a></li>
+          <li><a href="">LeaderBoared</a></li>
+          <li>
+            <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="flase" data-auto-logout-link="true">
+            </div>
+          </li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
-          <li><a href="*">Home</a></li>
-          <li><a href="*">About</a></li>
-          <li><a href="*">Contact</a></li>
-          <li><a href="*">LeaderBoared</a></li>
+          <li><a href="">Home</a></li>
+          <li><a href="">About</a></li>
+          <li><a href="">Contact</a></li>
+          <li><a href="">LeaderBoared</a></li>
+          <li>
+            <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="flase" data-auto-logout-link="true">
+            </div>
+          </li>
         </ul>
       </div>
     </nav>
 
-    <div class="container">
-      <h2>Welcome Page</h2>
-    </div>
     <div id="fb-root"></div>
       <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -42,8 +47,23 @@
         }
         (document, 'script', 'facebook-jssdk'));
       </script>
-      <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="flase" data-auto-logout-link="true">
+      <div class="container">
+        <img class="responsive-img" src="images/accounting.jpg">
+        <div class="row">
+          <div class="col s12">
+            <div class="card-panel cyan center">
+              <span class="white-text">For anyone who wants to learn accounting, Acc-Latte is a web app that teaches accounting through gaming. Unlike other accounting learning tools, Acc-Latte is free.
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
+      <footer class="page-footer cyan">
+        <div class="footer-copyright">
+          <div class="container center">
+          © 2017 Copyright<br>
+          </div>
+      </footer>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
       <script src="js/index.js"></script>
   </body>

@@ -1,3 +1,31 @@
 body {
   margin: 5px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: #e0e0e0;
+}
+.container {
+  flex: 1 0 auto;
+}
+
+.fb-login-button {
+  margin: 0 5px 0;
+  bottom: 22px;
+}
+
+nav .brand-logo {
+  margin-left: 5px;
+}
+
+.container .responsive-img {
+  margin-top: 5px;
+}
+
+.card-panel {
+  margin-top: 0;
+}
+
+.side-nav {
+  background-color: #e0e0e0;
 }
