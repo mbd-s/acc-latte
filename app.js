@@ -3,7 +3,7 @@ var app = express();
 
 var path = require('path');
 var config = require('./config');
-require('dotenv').config();
+require('dotenv').load();
 
 var FacebookStrategy = require('passport-facebook').Strategy;
 
