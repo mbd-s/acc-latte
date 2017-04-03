@@ -1,9 +1,8 @@
 var express = require('express');
 var app = express();
-
+require('dotenv').config();
 var path = require('path');
 var config = require('./config');
-require('dotenv').load();
 
 var FacebookStrategy = require('passport-facebook').Strategy;
 
