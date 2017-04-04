@@ -7,8 +7,8 @@ var path = require('path');
 var config = require('./config');
 
 var FacebookStrategy = require('passport-facebook').Strategy;
-
-app.use(express.static(path.join(__dirname, '/views')))
+var views_path = path.join(__dirname, '/views')
+app.use(express.static(views_path))
 app.use(express.static('public'))
 
 var url = config.mongo.url;
@@ -35,10 +35,19 @@ app.get('/login/facebook',
 
 app.get('/login/facebook/callback',
   function(req, res) {
-    res.redirect('/');
+    console.log(req)
+    //if login successfull
+      //extract user login token
+      //extract user details (email, firstname, lastname)
+      //save user if user does not already exists
+      //if user already exists update login token
+      //else create new user
+      res.sendFile('dashboard.html', { root: views_path });
+    //else
+      // res.sendFile('index.html'); with error message
   });
 
-app.listen(process.env.PORT || 3000, function() {
+var server = app.listen(process.env.PORT || 3000, function() {
   console.log('Connected to server');
 });
 
@@ -51,3 +60,5 @@ MongoClient.connect(url, function(err, db) {
 
   db.close();
 });
+
+module.exports = server;

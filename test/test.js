@@ -1,8 +1,15 @@
-var assert = require('assert');
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal(-1, [1,2,3].indexOf(4));
-    });
+var request = require('supertest');
+// var require = require('really-need')
+
+describe('GET /login/facebook/callback', function () {
+  var server;
+  beforeEach(function () {
+    server = require('../app', { bustCache: true });
+  });
+
+  it('returns 200', function testSlash(done) {
+    request(server)
+      .get('/login/facebook/callback')
+      .expect(200, done);
   });
 });
