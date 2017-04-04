@@ -1,12 +1,11 @@
 var express = require('express');
 var app = express();
 
-var config = require('./config');
-if (config.env == 'development') {
-  require('dotenv').config();
-}
+require('dotenv').config();
 
 var path = require('path');
+var config = require('./config');
+
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 app.use(express.static(path.join(__dirname, '/views')))
