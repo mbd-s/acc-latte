@@ -25,7 +25,7 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     if (user) {
-        res.sendFile('dashboard', { root: views_path } );
+        res.sendFile('profile', { root: views_path } );
     } else if (err) {
           return done(err);
     } else {
