@@ -32,3 +32,10 @@ nav .brand-logo {
 .row {
   margin-top: 15px;
 }
+@media (min-width: 600px) {
+  .card-image img {
+    height: 359px!important;
+    width: 240px!important;
+    background-color: white;
+  }
+}
