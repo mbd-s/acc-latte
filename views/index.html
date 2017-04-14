@@ -4,18 +4,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <link rel="stylesheet" href="stylesheet/animsition.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <link href="stylesheet/style.css" type="text/css" rel="stylesheet" />
     </script>
   </head>
 
   <body>
+<div class="animsition">
     <nav>
       <div class="nav-wrapper cyan">
         <a href="" class="brand-logo">Acc-Latte</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse pulse cyan"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="">Home</a></li>
+          <li class="active"><a href="">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="">Contact</a></li>
           <li><a href="">LeaderBoared</a></li>
@@ -25,9 +28,9 @@
           </li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
-          <li><a href="">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="dashboard.html">Contact</a></li>
+          <li class="active"><a class="animsition-link" href="">Home</a></li>
+          <li><a class="animsition-link" href="about.html">About</a></li>
+          <li><a href="">Contact</a></li>
           <li><a href="">LeaderBoared</a></li>
           <li>
             <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="flase" data-auto-logout-link="true">
@@ -36,35 +39,39 @@
         </ul>
       </div>
     </nav>
-
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=135116307017055";
-        fjs.parentNode.insertBefore(js, fjs);
-        }
-        (document, 'script', 'facebook-jssdk'));
-      </script>
-      <div class="container">
-        <img class="responsive-img" src="images/accounting.jpg">
-        <div class="row">
-          <div class="col s12">
-            <div class="card-panel cyan center hoverable">
-              <span class="white-text">For anyone who wants to learn accounting, Acc-Latte is a web app that teaches accounting through gaming. Unlike other accounting learning tools, Acc-Latte is free.
-              </span>
+      <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=135116307017055";
+          fjs.parentNode.insertBefore(js, fjs);
+          }
+          (document, 'script', 'facebook-jssdk'));
+        </script>
+        <div class="container">
+          <img class="responsive-img" src="images/accounting.jpg">
+          <div class="row">
+            <div class="col s12">
+              <div class="card-panel cyan center hoverable">
+                <span class="white-text">For anyone who wants to learn accounting, Acc-Latte is a web app that teaches accounting through gaming. Unlike other accounting learning tools, Acc-Latte is free.
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+
       <footer class="page-footer cyan">
         <div class="footer-copyright">
           <div class="container center">
           © 2017 Copyright<br>
           </div>
       </footer>
+</div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+
+      <!-- animsition.js -->
+      <script src="js/animsition.min.js"></script>
       <script src="js/index.js"></script>
   </body>
 </html>
