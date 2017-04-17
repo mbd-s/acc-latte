@@ -42,10 +42,10 @@ app.get('/profile', function (req, res) {
 })
 
 app.get('/login/facebook',
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook', { scope : 'email'}));
 
 app.get('/login/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: 'profile',
+  passport.authenticate('facebook', { successRedirect: '/profile',
                                      failureRedirect: '/' }));
   // function(req, res) {
   //   console.log(req)
