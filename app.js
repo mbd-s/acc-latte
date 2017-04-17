@@ -21,36 +21,6 @@ mongoose.connect(url);
 
 var passport = require('passport');
 
-passport.use(new FacebookStrategy({
-    clientID: config.facebook.id,
-    clientSecret: config.facebook.appSecret,
-    callbackURL: config.facebook.callBackUrl + '/login/facebook/callback'
-  },
-  function(accessToken, refreshToken, profile, done, cb) {
-    process.nextTick(function() {
-      User.findOne({'facebook.id': profile.id}, function(err, user){
-        if (err)
-          return done(err);
-        if (user)
-          return done(null, user);
-        else {
-          var newUser = new User();
-          newUser.facebook.id = profile.id;
-          newUser.facebook.token = accessToken;
-          newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-          newUser.facebook.email = profile.emails[0].value;
-
-          newUser.save(function(err){
-            if(err)
-              throw err;
-            return done(null, newUser);
-          })
-        }
-      })
-    })
-  }
-));
-
 app.get('/', function (req, res) {
   res.render('index');
 })
@@ -98,7 +68,35 @@ app.get('/login/facebook/callback',
   //       //     var newUser = new User();
   //        res.redirect('profile');
   //       // }
+  passport.use(new FacebookStrategy({
+      clientID: config.facebook.id,
+      clientSecret: config.facebook.appSecret,
+      callbackURL: config.facebook.callBackUrl + '/login/facebook/callback'
+    },
+    function(accessToken, refreshToken, profile, done, cb) {
+      process.nextTick(function() {
+        User.findOne({'facebook.id': profile.id}, function(err, user){
+          if (err)
+            return done(err);
+          if (user)
+            return done(null, user);
+          else {
+            var newUser = new User();
+            newUser.facebook.id = profile.id;
+            newUser.facebook.token = accessToken;
+            newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+            newUser.facebook.email = profile.emails[0].value;
 
+            newUser.save(function(err){
+              if(err)
+                throw err;
+              return done(null, newUser);
+            })
+          }
+        })
+      })
+    }
+  ));
 
 
 var server = app.listen(process.env.PORT || 3000, function() {

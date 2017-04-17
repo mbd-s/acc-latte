@@ -16,7 +16,7 @@
           <img class="responsive-img" src="images/accounting.jpg">
           <div class="row">
             <div class="col s12">
-              <div class="card-panel cyan center hoverable">
+              <div class="card-panel cyan center">
                 <span class="white-text">For anyone who wants to learn accounting, Acc-Latte is a web app that teaches accounting through gaming. Unlike other accounting learning tools, Acc-Latte is FREE and FUN.
                 </span>
               </div>
@@ -24,8 +24,11 @@
           </div>
         </div>
         <div class="center">
-          <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="flase"
+          <div class="fb-login-button hoverable" data-max-rows="1" data-size="xlarge" data-show-faces="flase"
             data-auto-logout-link="true"></div>
+        </div>
+        <div class="center">
+          <p><strong>Name:</strong> <%= user.facebook.name %> </p>
         </div>
     </div>
   </body>
