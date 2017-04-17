@@ -1,11 +1,14 @@
 var express = require('express');
+var exphbs  = require('express-handlebars');
 var app = express();
-var renderLayouts = require('layouts');
 
 require('dotenv').config();
 
 var path = require('path');
 var config = require('./config');
+
+app.engine('handlebars', exphbs({defaultLayout: 'nav'}));
+app.set('view engine', 'handlebars');
 
 var FacebookStrategy = require('passport-facebook').Strategy;
 var views_path = path.join(__dirname, '/views')
@@ -25,7 +28,7 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     if (user) {
-        res.sendFile('profile', { root: views_path } );
+        res.render('profile', { root: views_path } );
     } else if (err) {
           return done(err);
     } else {
@@ -50,7 +53,23 @@ passport.use(new FacebookStrategy({
 ));
 
 app.get('/', function (req, res) {
-  res.sendFile('index.html');
+  res.render('index');
+})
+
+app.get('/about', function (req, res) {
+  res.render('about');
+})
+
+app.get('/contact', function (req, res) {
+  res.render('contact');
+})
+
+app.get('/leaderboard', function (req, res) {
+  res.render('leaderboard');
+})
+
+app.get('/profile', function (req, res) {
+  res.render('profile');
 })
 
 app.get('/login/facebook',
