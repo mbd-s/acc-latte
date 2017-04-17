@@ -73,13 +73,13 @@ app.get('/login/facebook/callback',
       clientSecret: config.facebook.appSecret,
       callbackURL: config.facebook.callBackUrl + '/login/facebook/callback'
     },
-    function(accessToken, refreshToken, profile, done, cb) {
+    function(accessToken, refreshToken, profile, cb) {
       process.nextTick(function() {
         User.findOne({'facebook.id': profile.id}, function(err, user){
           if (err)
-            return done(err);
+            return cb(err);
           if (user)
-            return done(null, user);
+            return cb(null, user);
           else {
             var newUser = new User();
             newUser.facebook.id = profile.id;
@@ -90,7 +90,7 @@ app.get('/login/facebook/callback',
             newUser.save(function(err){
               if(err)
                 throw err;
-              return done(null, newUser);
+              return cb(null, newUser);
             })
           }
         })
