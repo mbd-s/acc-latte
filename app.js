@@ -75,6 +75,7 @@ app.get('/login/facebook/callback',
     },
     function(accessToken, refreshToken, profile, cb) {
       process.nextTick(function() {
+        console.log(profile);
         User.findOne({'facebook.id': profile.id}, function(err, user){
           if (err)
             return cb(err);
@@ -83,7 +84,7 @@ app.get('/login/facebook/callback',
           else {
             var newUser = new User();
             newUser.facebook.id = profile.id;
-            newUser.facebook.token = accessToken;
+            newUser.facebook.token = profile.accessToken;
             newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
             newUser.facebook.email = profile.emails[0].value;
 
