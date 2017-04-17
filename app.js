@@ -43,7 +43,7 @@ passport.use(new FacebookStrategy({
           newUser.save(function(err){
             if(err)
               throw err;
-            return done(null, newUser);  
+            return done(null, newUser);
           })
         }
       })
@@ -75,29 +75,30 @@ app.get('/login/facebook',
   passport.authenticate('facebook'));
 
 app.get('/login/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/' }),
-  function(req, res) {
-    console.log(req)
-    //if login successfull
-      //extract user login token
-      //extract user details (email, firstname, lastname)
-      //save user if user does not already exists
-      //if user already exists update login token
-      //else create new user
-      //else
-      // res.sendFile('index.html'); with error message
+  passport.authenticate('facebook', { successRedirect: 'profile',
+                                     failureRedirect: '/' }));
+  // function(req, res) {
+  //   console.log(req)
+  //   //if login successfull
+  //     //extract user login token
+  //     //extract user details (email, firstname, lastname)
+  //     //save user if user does not already exists
+  //     //if user already exists update login token
+  //     //else create new user
+  //     //else
+  //     // res.sendFile('index.html'); with error message
+  //
+  //       // if the user is found, then log them in
+  //       // if (user) {
+  //       //     res.render('profile', { root: views_path } );
+  //       // } else if (err) {
+  //       //       return done(err);
+  //       // } else {
+  //       //     // if there is no user found with that facebook id, create them
+  //       //     var newUser = new User();
+  //        res.redirect('profile');
+  //       // }
 
-        // if the user is found, then log them in
-        // if (user) {
-        //     res.render('profile', { root: views_path } );
-        // } else if (err) {
-        //       return done(err);
-        // } else {
-        //     // if there is no user found with that facebook id, create them
-        //     var newUser = new User();
-         res.redirect('profile');
-        // }
-      });
 
 
 var server = app.listen(process.env.PORT || 3000, function() {
