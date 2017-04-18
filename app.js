@@ -1,51 +1,54 @@
-var config = require('./config');
+var exphbs  = require('express-handlebars');
 var express = require('express');
 var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-var path = require('path');
+var Strategy = require('passport-facebook').Strategy;
 
-passport.use(new FacebookStrategy({
-    clientID: config.facebook.id,
-    clientSecret: config.facebook.appSecret,
-    callbackURL: config.facebook.callBackUrl + '/login/facebook/callback'
+
+// Configure the Facebook strategy for use by Passport.
+//
+// OAuth 2.0-based strategies require a `verify` function which receives the
+// credential (`accessToken`) for accessing the Facebook API on the user's
+// behalf, along with the user's profile.  The function must invoke `cb`
+// with a user object, which will be set at `req.user` in route handlers after
+// authentication.
+passport.use(new Strategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: 'https://acc-latte.herokuapp.com/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
-    // process.nextTick(function() {
-      console.log(profile);
-      User.findOne({'facebook.id': profile.id}, function(err, user){
-        if (err) {
-          console.log('Error')
-          return cb(err);
-        }
-        if (user) {
-          console.log('User found')
-          return cb(null, user);
-        } else {
-          console.log('Creating user')
-
-          var newUser = new User();
-          newUser.facebook.id = profile.id;
-          newUser.facebook.token = profile.accessToken;
-          newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-          newUser.facebook.email = profile.emails[0].value;
-
-          newUser.save(function(err, newUser){
-            if(err)
-              throw err;
-            return cb(null, newUser);
-          })
-        }
-      })
-    // })
-  }
-));
+    // In this example, the user's Facebook profile is supplied as the user
+    // record.  In a production-quality application, the Facebook profile should
+    // be associated with a user record in the application's database, which
+    // allows for account linking and authentication with other identity
+    // providers.
+    return cb(null, profile);
+  }));
 
 
-var exphbs  = require('express-handlebars');
+// Configure Passport authenticated session persistence.
+//
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session.  In a
+// production-quality application, this would typically be as simple as
+// supplying the user ID when serializing, and querying the user record by ID
+// from the database when deserializing.  However, due to the fact that this
+// example does not have a database, the complete Facebook profile is serialized
+// and deserialized.
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+
+// Create a new Express application.
+var path = require('path');
 var app = express();
 
-require('dotenv').config();
-
+// Configure view engine to render EJS templates.
 app.engine('handlebars', exphbs({defaultLayout: 'nav'}));
 app.set('view engine', 'handlebars');
 
@@ -53,60 +56,48 @@ var views_path = path.join(__dirname, '/views')
 app.use(express.static(views_path))
 app.use(express.static('public'))
 
+
+// Use application-level middleware for common functionality, including
+// logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
+// Initialize Passport and restore authentication state, if any, from the
+// session.
 app.use(passport.initialize());
 app.use(passport.session());
 
-var url = config.mongo.url;
-var mongoose = require('mongoose');
-mongoose.connect(url);
 
-app.get('/', function (req, res) {
-  res.render('index');
-})
+// Define routes.
 
-app.get('/about', function (req, res) {
-  res.render('about');
-})
+  app.get('/', function (req, res) {
+    res.render('index');
+  })
 
-app.get('/contact', function (req, res) {
-  res.render('contact');
-})
+app.get('/login/facebook',
+  passport.authenticate('facebook'));
 
-app.get('/leaderboard', function (req, res) {
-  res.render('leaderboard');
-})
+app.get('/login/facebook/return',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
-app.get('/profile', function (req, res) {
-  res.render('profile');
-})
+  app.get('/profile', function (req, res) {
+    res.render('profile');
+  })
+// app.get('/profile',
+//   require('connect-ensure-login').ensureLoggedIn(),
+//   function(req, res){
+//     res.render('profile', { user: req.user });
+//   });
 
-  app.get('/login/facebook',
-    passport.authenticate('facebook', { scope: ['email'] }));
-
-    app.get('/login/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
-    function(req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('/');
-    });
+// app.listen(3000);
 
 var server = app.listen(process.env.PORT || 3000, function() {
   console.log('Connected to server');
 });
 
-var MongoClient = require('mongodb').MongoClient;
-var assert = require('assert');
-
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-  console.log("Connected to db");
-
-  db.close();
-});
-
-module.exports = server;
+module.exports = server
