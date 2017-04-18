@@ -93,7 +93,7 @@ app.get('/login/facebook/callback',
             newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
             newUser.facebook.email = profile.emails[0].value;
 
-            newUser.save(function(err){
+            newUser.save(function(err, newUser){
               if(err)
                 throw err;
               return cb(null, newUser);
