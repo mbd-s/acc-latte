@@ -77,11 +77,16 @@ app.get('/login/facebook/callback',
       process.nextTick(function() {
         console.log(profile);
         User.findOne({'facebook.id': profile.id}, function(err, user){
-          if (err)
+          if (err) {
+            console.log('Error')
             return cb(err);
-          if (user)
+          }
+          if (user) {
+            console.log('User found')
             return cb(null, user);
-          else {
+          } else {
+            console.log('Creating user')
+
             var newUser = new User();
             newUser.facebook.id = profile.id;
             newUser.facebook.token = profile.accessToken;
