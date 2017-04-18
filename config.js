@@ -3,8 +3,8 @@ config.mongo = {}
 config.facebook = {}
 
 config.env = process.env.NODE_ENV || 'development';
-config.facebook.id = process.env.FACEBOOK_ID;
-config.facebook.appSecret = process.env.FACEBOOK_APP_SECRET;
+config.facebook.id = process.env.CLIENT_ID;
+config.facebook.appSecret = process.env.CLIENT_SECRET;
 
 if (config.env === 'production'){
   config.mongo.url = process.env.MONGODB_URI;
