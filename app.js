@@ -3,11 +3,13 @@ var express = require('express');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var path = require('path');
+var User = require('./models/user');
 
 passport.use(new FacebookStrategy({
-    clientID: config.facebook.id,
-    clientSecret: config.facebook.appSecret,
-    callbackURL: config.facebook.callBackUrl + '/login/facebook/callback'
+    clientID: '135116307017055',
+    clientSecret: '26f724657f5de18efbbf78f3c10dfad9',
+    callbackURL: config.facebook.callBackUrl + '/login/facebook/callback',
+    profileFields: ['id', 'displayName', 'name', 'email']
   },
   function(accessToken, refreshToken, profile, cb) {
     // process.nextTick(function() {
@@ -60,6 +62,15 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
 
 var url = config.mongo.url;
 var mongoose = require('mongoose');
