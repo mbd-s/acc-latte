@@ -12,7 +12,6 @@ passport.use(new FacebookStrategy({
     profileFields: ['id', 'displayName', 'name', 'email']
   },
   function(accessToken, refreshToken, profile, cb) {
-    // process.nextTick(function() {
       console.log(profile);
       User.findOne({'facebook.id': profile.id}, function(err, user){
         if (err) {
@@ -38,7 +37,6 @@ passport.use(new FacebookStrategy({
           })
         }
       })
-    // })
   }
 ));
 
@@ -96,15 +94,14 @@ app.get('/profile', function (req, res) {
   res.render('profile');
 })
 
-  app.get('/login/facebook',
-    passport.authenticate('facebook', { scope: ['email'] }));
+app.get('/login/facebook',
+  passport.authenticate('facebook', { scope: ['email'] }));
 
-    app.get('/login/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
-    function(req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('/');
-    });
+app.get('/login/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/profile');
+  });
 
 var server = app.listen(process.env.PORT || 3000, function() {
   console.log('Connected to server');
