@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $('select').material_select();
   $(".button-collapse").sideNav();
     $(".animsition").animsition({
       inClass: 'fade-in-down',
@@ -12,6 +13,7 @@ $(document).ready(function(){
 
     $('#goAhead').click(function() {
       $('#cofeeShop-wel').addClass('hidin');
+      $("#cofeeShop-info").removeClass("hidin");
     })
 
 
