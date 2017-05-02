@@ -55,6 +55,10 @@ nav .brand-logo {
   border-radius: 25px;
 }
 
+.hidin {
+  display: none;
+}
+
 @media (min-width: 600px) {
   .card-image img {
     height: 359px!important;

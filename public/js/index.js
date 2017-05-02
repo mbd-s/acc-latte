@@ -1,5 +1,18 @@
-$(".button-collapse").sideNav();
-$(".animsition").animsition({
-  inClass: 'fade-in-down',
-  inDuration: 800
+$(document).ready(function(){
+  $(".button-collapse").sideNav();
+    $(".animsition").animsition({
+      inClass: 'fade-in-down',
+      inDuration: 800
+    });
+
+    $('#cs-btn').click(function(){
+      $('#cofeeShop').addClass('hidin');
+      $("#cofeeShop-wel").removeClass("hidin");
+    });
+
+    $('#goAhead').click(function() {
+      $('#cofeeShop-wel').addClass('hidin');
+    })
+
+
 });
