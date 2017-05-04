@@ -5,6 +5,41 @@ body {
   flex-direction: column;
   background-color: #e0e0e0;
 }
+
+.text {
+  font-family: 'Open Sans', sans-serif;
+  color:#ffffff;
+  font-size: 18px;
+}
+.login {
+  background-color: #00bcd4;
+  border-radius: 10px;
+  width: 70px;
+  margin-bottom: 10px;
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition: .5s;
+}
+.login:hover {
+ background-color: #ffffff;
+}
+.login a {
+  font-family: 'Open Sans', sans-serif;
+  color:#ffffff;
+  size: 20px;
+  padding: 10px;
+  text-align: center;
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition: .5s;
+}
+.login a:hover {
+  color:#000000;
+}
 .animsition {
   flex: 1 0 auto;
 }
