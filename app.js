@@ -4,6 +4,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var path = require('path');
 var User = require('./models/user');
+var logout = require('express-passport-logout');
 
 passport.use(new FacebookStrategy({
     clientID: '135116307017055',
@@ -102,6 +103,15 @@ app.get('/login/facebook/callback',
   function(req, res) {
     res.redirect('/profile');
   });
+
+app.get('/logout/facebook', function(req, res){
+      req.logout();
+      res.redirect('/');
+    });
+    // FB.logout(function(response) {
+    //    // Person is now logged out
+    // });
+
 
 var server = app.listen(process.env.PORT || 3000, function() {
   console.log('Connected to server');
