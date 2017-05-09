@@ -44,6 +44,10 @@ body {
   flex: 1 0 auto;
 }
 
+a {
+  color: white!important;
+}
+
 .fb-login-button {
   margin: 0 5px 0;
   bottom: 22px;
