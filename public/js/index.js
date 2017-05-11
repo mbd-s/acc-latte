@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $('select').material_select();
   $(".button-collapse").sideNav();
-  
+
     $(".animsition").animsition({
       inClass: 'fade-in-down',
       inDuration: 800
@@ -37,7 +37,6 @@ $(document).ready(function(){
         } else if ($('[value="1"]').is(':selected')) {
           cofeeShopRent = "buying";
         }
-        console.log(cofeeShopRent);
         cofeeShopInfo['rent'] = cofeeShopRent;
         console.log(cofeeShopInfo);
         // try to insert cofeeShopInfo object to db!!!!!!!!!!!!!!!!!!!!!!!
