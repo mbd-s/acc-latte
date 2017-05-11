@@ -5,7 +5,7 @@ $(document).ready(function(){
       inClass: 'fade-in-down',
       inDuration: 800
     });
-    let cofeeShopInfo = [];
+    let cofeeShopInfo = {};
 
     $('#cs-btn').click(function(){
       $('#cofeeShop').addClass('hidin');
@@ -21,7 +21,7 @@ $(document).ready(function(){
     $('#goName').click(function() {
       const cofeeShopName = $('#cofeeshop-name').val();
       console.log(cofeeShopName);
-      cofeeShopInfo.push(cofeeShopName);
+      cofeeShopInfo['name'] = cofeeShopName;
       console.log(cofeeShopInfo);
       $("#cofeeShop-name").addClass("hidin");
       $("#cofeeShop-rent").removeClass("hidin");
@@ -37,9 +37,10 @@ $(document).ready(function(){
           cofeeShopRent = "buying";
         }
         console.log(cofeeShopRent);
-        cofeeShopInfo.push(cofeeShopRent);
+        cofeeShopInfo['rent'] = cofeeShopRent;
         console.log(cofeeShopInfo);
         $("#cofeeShop-rent").addClass("hidin");
+        $("#cofeeShop-assets").removeClass("hidin");
       })
     })
 
