@@ -1,6 +1,7 @@
 $(document).ready(function(){
   $('select').material_select();
   $(".button-collapse").sideNav();
+  
     $(".animsition").animsition({
       inClass: 'fade-in-down',
       inDuration: 800
@@ -39,11 +40,23 @@ $(document).ready(function(){
         console.log(cofeeShopRent);
         cofeeShopInfo['rent'] = cofeeShopRent;
         console.log(cofeeShopInfo);
+        // try to insert cofeeShopInfo object to db!!!!!!!!!!!!!!!!!!!!!!!
+          // var insertDocument = function(db, callback) {
+          //    db.collection('User').insertOne({
+          //       "cofeeShopInfo" : {
+          //          "cofeeShopName" : cofeeShopName,
+          //          "cofeeShopRent" : cofeeShopRent
+          //       }, function(err, result) {
+          //     assert.equal(err, null);
+          //     console.log("Inserted a document into the restaurants collection.");
+          //     callback();
+          //   }
+          //   });
+          // };
         $("#cofeeShop-rent").addClass("hidin");
         $("#cofeeShop-assets").removeClass("hidin");
       })
     })
-
 
 
 

@@ -7,8 +7,7 @@ var userSchema = mongoose.Schema({
     email: String,
   },
   cofeeShopInfo: {
-    cofee_shop_name: String,
-    cofee_shop_rent: String
+    
   }
 });
 
