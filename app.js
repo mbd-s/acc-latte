@@ -119,6 +119,22 @@ var server = app.listen(process.env.PORT || 3000, function() {
 
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// traying to save user input to DB !!!!!!!!!!!!!!!!!!!!!
+app.post("/profile", (req, res) => {
+  var cofeeShopInfo = new User(req.body);
+  console.log(cofeeShopInfo);
+  cofeeShopInfo.save()
+    .then(item => {
+      res.send("item saved to database");
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
+    });
+});
 
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
