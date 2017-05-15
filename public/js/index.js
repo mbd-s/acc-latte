@@ -6,7 +6,13 @@ $(document).ready(function(){
       inClass: 'fade-in-down',
       inDuration: 800
     });
+
+    // cofeeShop ---------------------------------
+
     let cofeeShopInfo = {};
+    let cofeeShopName ;
+    let cofeeShopRent ;
+    let asstsTotal = 0;
 
     $('#cs-btn').click(function(){
       $('#cofeeShop').addClass('hidin');
@@ -20,17 +26,13 @@ $(document).ready(function(){
     })
 
     $('#goName').click(function() {
-      const cofeeShopName = $('#cofeeshop-name').val();
-      console.log(cofeeShopName);
+      cofeeShopName = $('#cofeeshop-name').val();
       cofeeShopInfo['name'] = cofeeShopName;
-      console.log(cofeeShopInfo);
       $("#cofeeShop-name").addClass("hidin");
       $("#cofeeShop-rent").removeClass("hidin");
     })
 
     $('#goRent').click(function() {
-      let cofeeShopRent ;
-
       $('#rent-buy option').each(function() {
         if($('[value="2"]').is(':selected')){
           cofeeShopRent = "renting";
@@ -39,23 +41,40 @@ $(document).ready(function(){
         }
         cofeeShopInfo['rent'] = cofeeShopRent;
         console.log(cofeeShopInfo);
-        // try to insert cofeeShopInfo object to db!!!!!!!!!!!!!!!!!!!!!!!
-          // var insertDocument = function(db, callback) {
-          //    db.collection('User').insertOne({
-          //       "cofeeShopInfo" : {
-          //          "cofeeShopName" : cofeeShopName,
-          //          "cofeeShopRent" : cofeeShopRent
-          //       }, function(err, result) {
-          //     assert.equal(err, null);
-          //     console.log("Inserted a document into the restaurants collection.");
-          //     callback();
-          //   }
-          //   });
-          // };
         $("#cofeeShop-rent").addClass("hidin");
         $("#cofeeShop-assets").removeClass("hidin");
       })
     })
+
+    $('.expresso').hover(function(){
+      Materialize.toast('I can make atleast 3000 cup :)', 4000, 'expresso');
+    });
+    $('.nescafe').hover(function(){
+      Materialize.toast('I can make atleast 3500 cup :)', 4000, 'nescafe');
+    });
+    $('.dulungo').hover(function(){
+      Materialize.toast('I can make atleast 4000 cup :)', 4000, 'dulungo');
+    });
+
+    $('.expresso').dblclick(function(){
+      $('.chousen-assts').append('<p>Expresso 300€</p>');
+      $('.expresso').addClass('hidin');
+      asstsTotal = asstsTotal + 300;
+      console.log(asstsTotal);
+    });
+    $('.nescafe').dblclick(function(){
+      $('.chousen-assts').append('<p>Nescafe 350€</p>');
+      $('.nescafe').addClass('hidin');
+      asstsTotal = asstsTotal + 350;
+      console.log(asstsTotal);
+    });
+    $('.dulungo').dblclick(function(){
+      $('.chousen-assts').append('<p>Dulungo 400€</p>');
+      $('.dulungo').addClass('hidin');
+      asstsTotal = asstsTotal + 400;
+      console.log(asstsTotal);
+    });
+
 
 
 

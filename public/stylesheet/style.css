@@ -102,6 +102,15 @@ nav .brand-logo {
   border: 1px solid white;
 }
 
+.cofeeMachine {
+  text-align: center;
+  vertical-align: middle;
+  border: 1px white solid;
+  box-shadow: 5px 5px white;
+  border-radius: 25px;
+  min-height: 200px!important;
+}
+
 @media (min-width: 600px) {
   .card-image img {
     height: 359px!important;
