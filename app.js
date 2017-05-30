@@ -15,6 +15,7 @@ var MongoClient = require('mongodb').MongoClient;
 var exphbs  = require('express-handlebars');
 var app = express();
 
+
 require('dotenv').config();
 
 app.engine('handlebars', exphbs({defaultLayout: 'nav'}));
@@ -127,24 +128,31 @@ app.get('/case', function(req, res){
       res.render('cases/new');
     });
 
-app.post('/case', (req, res) => {
+app.post('/case', function(req, res) {
   var newCase = new Case();
-  newCase.save(req.body, (err, result) => {
-    if (err) return console.log(err)
+      newCase.name = req.body.name
+      newCase.save(req.body, (err, result) => {
+        if (err) return console.log(err)
 
-    console.log('saved to database')
-    res.send(req.body.name)
-  })
+        console.log('saved to database')
+        res.redirect('/case/index')
+      })
 });
 
-app.get('/case/index', (req, res) => {
-  var cursor = Case.find()
-})
+// app.get('/case/index', function(req, res) {
+//   var cursor = Case.find()
+// })
+
+app.get('/case/index', function(req, res) {
+    Case.find(function(err, arrayOfItems) {
+        res.render('cases/index', {
+            cases: arrayOfItems
+        });
+    });
+});
 
 var server = app.listen(process.env.PORT || 3000, function() {
   console.log('Connected to server');
 });
-
-
 
 module.exports = server;

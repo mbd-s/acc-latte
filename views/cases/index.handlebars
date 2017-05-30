@@ -1,1 +1,11 @@
-<ul class="quotes">
+<div>
+	<h1>Cases</h1>
+	<p>
+		{{#each cases}}
+		<div class="case">
+			<p><a href="edit/{{this.id}}/">{{this.case}}</a></p>
+			<p><a href="delete/{{this._id}}">delete</a></p>
+		</div>
+		{{/each}}
+	</p>
+</div>
