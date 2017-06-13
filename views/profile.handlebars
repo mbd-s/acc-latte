@@ -9,17 +9,14 @@
           <h5 class="center">We Are Doing Business Here & BTW We’ll Learn Accounting Too</h5>
           <br>
           <p>Choose what type of business you’d like to start up … </p>
+
           <div class="row row-box">
+            {{#each cases}}
             <div class="col s12 m4 l4">
               <a class="waves-effect waves-light btn box cyan"
-                id="cs-btn">CofeeShop</a>
+                id="cs-btn">{{this.name}}</a>
             </div>
-            <div class="col s12 m4 l4">
-              <a class="waves-effect waves-light btn box cyan disabled">Foto Studio</a>
-            </div>
-            <div class="col s12 m4 l4">
-              <a class="waves-effect waves-light btn box cyan disabled">Smoothie Stall</a>
-            </div>
+            {{/each}}
           </div>
         </div>
         <ul class="cases">

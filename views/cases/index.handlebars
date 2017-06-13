@@ -1,11 +1,15 @@
-<div>
-	<h1>Cases</h1>
-	<p>
-		{{#each cases}}
-		<div class="case">
-			<p><a href="edit/{{this.id}}/">{{this.case}}</a></p>
-			<p><a href="delete/{{this._id}}">delete</a></p>
-		</div>
-		{{/each}}
-	</p>
-</div>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+  {{#each cases}}
+  <tr>
+    <td>{{this.name}}</td>
+    <td>
+      <a href="{{this._id}}/edit">Edit</a> |
+      <a href="{{this._id}}" method="DELETE" data-confirm="Do you want to delete?">Delete</a>
+    </td>
+  </tr>
+  {{/each}}
+</table>

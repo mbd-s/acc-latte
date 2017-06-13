@@ -9,6 +9,7 @@ var logout = require('express-passport-logout');
 
 var assert = require('assert');
 var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 var MongoClient = require('mongodb').MongoClient;
 
 
@@ -30,7 +31,28 @@ app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
-app.use(bodyParser.json())
+app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(methodOverride('_method'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
+}));
+
+// app.use(bodyParser.json())
+// app.use(methodOverride(function(req, res){
+//   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+//     var method = req.body._method
+//     delete req.body._method
+//     return method
+//   }
+// }))
+app.use(methodOverride('_method'));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -107,7 +129,9 @@ app.get('/leaderboard', function (req, res) {
 })
 
 app.get('/profile', function (req, res) {
-  res.render('profile');
+  Case.find(function(err, all_cases) {
+      res.render('profile', { cases: all_cases });
+  });
 })
 
 app.get('/login/facebook',
@@ -124,30 +148,47 @@ app.get('/logout/facebook', function(req, res){
       res.redirect('/');
     });
 
-app.get('/case', function(req, res){
+app.get('/cases/new', function(req, res){
       res.render('cases/new');
     });
 
-app.post('/case', function(req, res) {
+app.post('/cases', function(req, res) {
   var newCase = new Case();
-      newCase.name = req.body.name
-      newCase.save(req.body, (err, result) => {
-        if (err) return console.log(err)
+  newCase.name = req.body.name
+  newCase.save(req.body, (err, found) => {
+    if (err) return console.log(err)
 
-        console.log('saved to database')
-        res.redirect('/case/index')
-      })
+    return res.redirect('cases/' + found._id);
+  })
 });
 
-// app.get('/case/index', function(req, res) {
-//   var cursor = Case.find()
-// })
+app.get('/cases/:id', (req, res) => {
+  Case.findById(req.params.id, function (err, found) {
+    if (err) return console.log(err)
 
-app.get('/case/index', function(req, res) {
-    Case.find(function(err, arrayOfItems) {
-        res.render('cases/index', {
-            cases: arrayOfItems
-        });
+    res.render('cases/show', { case: { id: found._id, name: found.name } });
+  })
+});
+
+app.get('/cases/:id/edit', (req, res) => {
+  Case.findById(req.params.id, (err, found) => {
+    if (err) return console.log(err)
+
+    res.render('cases/edit', { case: { id: found._id, name: found.name } });
+  })
+});
+
+app.put('/cases/:id', (req, res) => {
+  Case.findByIdAndUpdate(req.params.id, { name: req.body.name },  { }, (err, found) => {
+    if (err) return console.log(err)
+
+    return res.redirect(req.params.id);
+  })
+});
+
+app.get('/cases', function(req, res) {
+    Case.find(function(err, all_cases) {
+        res.render('cases/index', { cases: all_cases });
     });
 });
 
