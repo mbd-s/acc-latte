@@ -192,6 +192,15 @@ app.get('/cases', function(req, res) {
     });
 });
 
+app.get('/cases/:id/delete', (req, res) => {
+  Case.findByIdAndRemove(req.params.id, { name: req.body.name }, (err, found) => {
+    console.log("Case is removed");
+    if (err) return console.log(err)
+
+    res.redirect('/cases');
+  })
+});
+
 var server = app.listen(process.env.PORT || 3000, function() {
   console.log('Connected to server');
 });

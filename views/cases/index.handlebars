@@ -1,15 +1,19 @@
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Actions</th>
-  </tr>
-  {{#each cases}}
-  <tr>
-    <td>{{this.name}}</td>
-    <td>
-      <a href="{{this._id}}/edit">Edit</a> |
-      <a href="{{this._id}}" method="DELETE" data-confirm="Do you want to delete?">Delete</a>
-    </td>
-  </tr>
-  {{/each}}
-</table>
+<body>
+  <div class="animsition">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+      {{#each cases}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>
+          <a href="{{this._id}}/edit">Edit</a> |
+          <a href="{{this._id}}/delete" method="DELETE" data-confirm="Do you want to delete?">Delete</a>
+        </td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+</body>
