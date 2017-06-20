@@ -5,6 +5,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var path = require('path');
 var User = require('./models/user');
 var Case = require('./models/case');
+var Question = require('./models/question');
+
+
 var logout = require('express-passport-logout');
 
 var assert = require('assert');
@@ -43,14 +46,6 @@ app.use(methodOverride(function (req, res) {
   }
 }));
 
-// app.use(bodyParser.json())
-// app.use(methodOverride(function(req, res){
-//   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-//     var method = req.body._method
-//     delete req.body._method
-//     return method
-//   }
-// }))
 app.use(methodOverride('_method'));
 
 app.use(passport.initialize());
@@ -148,6 +143,13 @@ app.get('/logout/facebook', function(req, res){
       res.redirect('/');
     });
 
+app.get('/dashboard', function(req, res) {
+  res.render('dashboard');
+});
+
+// cases
+// =================
+
 app.get('/cases/new', function(req, res){
       res.render('cases/new');
     });
@@ -200,6 +202,32 @@ app.get('/cases/:id/delete', (req, res) => {
     res.redirect('/cases');
   })
 });
+
+// End cases
+// =================
+
+
+// QUESTIONS
+// =================
+
+app.get('/questions/new', function(req, res){
+      res.render('questions/new');
+    });
+
+app.post('/questions', function(req, res) {
+  var newQuestion = new Question();
+  newQuestion.question = req.body.question
+  // newQuestion.CaseId = Case._id
+  newQuestion.save(req.body, (err, found) => {
+    console.log("Q saved ************");
+    if (err) return console.log(err)
+
+    return res.redirect('questions/' + found._id);
+  })
+});
+
+// END QUESTIONS
+// =================
 
 var server = app.listen(process.env.PORT || 3000, function() {
   console.log('Connected to server');

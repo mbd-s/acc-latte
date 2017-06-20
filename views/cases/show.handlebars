@@ -1,13 +1,19 @@
-<table>
-  <tr>
-    <td>Name</td>
-    <td>{{case.name}}</td>
-  </tr>
-  <tr>
-    <td>Actions</td>
-    <td>
-      <a href="{{case.id}}/edit">Edit</a>
-      <a href="{{case.id}}" method="DELETE" data-confirm="Do you want to delete?">Delete</a>
-    </td>
-  </tr>
-</table>
+<body>
+  <div class="animsition">
+    <div class="container">
+      <table class="striped">
+        <tr>
+          <td>Name</td>
+          <td>{{case.name}}</td>
+        </tr>
+        <tr>
+          <td>Actions</td>
+          <td>
+            <a href="{{case.id}}/edit" class="waves-effect waves-light btn cyan">Edit</a>
+          </td>
+        </tr>
+      </table>
+      <a class="waves-effect waves-light btn cyan" href="/cases">SUBMIT</a>
+    </div>
+  </div>
+</body>

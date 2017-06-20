@@ -1,19 +1,29 @@
 <body>
   <div class="animsition">
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Actions</th>
-      </tr>
-      {{#each cases}}
-      <tr>
-        <td>{{this.name}}</td>
-        <td>
-          <a href="{{this._id}}/edit">Edit</a> |
-          <a href="{{this._id}}/delete" method="DELETE" data-confirm="Do you want to delete?">Delete</a>
-        </td>
-      </tr>
-      {{/each}}
-    </table>
+    <div class="left">
+      <a class="waves-effect waves-light btn cyan" href="/dashboard">BACK</a>
+    </div>
+    <div class="container">
+      <div class="left">
+        <a class="waves-effect waves-light btn cyan" href="/cases/new">NEW CASE</a>
+      </div>
+      <table class="striped">
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+        {{#each cases}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>
+            <a href="{{this._id}}/edit" class="waves-effect waves-light btn cyan">Edit</a> |
+            <a href="{{this._id}}/delete" method="DELETE" data-confirm="Do you want to delete?"
+              class="waves-effect waves-light btn cyan">Delete</a> |
+            <a href="/questions/new" class="waves-effect waves-light btn cyan">Add a question</a>
+          </td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
   </div>
 </body>
